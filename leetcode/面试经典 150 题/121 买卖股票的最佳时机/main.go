@@ -10,19 +10,15 @@ func maxProfit(prices []int) int {
 	if len(prices) <= 1 {
 		return 0
 	}
-	p := 0    // 累计利润
-	maxp := 0 // 最大利润
+	minPrice := prices[0]
+	maxPrice := 0
 	for i := 1; i < len(prices); i++ {
-		pp := prices[i] - prices[i-1] // 今日对比昨日的利润
-		p += pp
-		if p <= 0 {
-			p = 0
-			continue
-		} else {
-			if maxp < p {
-				maxp = p
-			}
+		if prices[i] < minPrice {
+			minPrice = prices[i]
+		}
+		if prices[i]-minPrice > maxPrice {
+			maxPrice = prices[i] - minPrice
 		}
 	}
-	return maxp
+	return maxPrice
 }
